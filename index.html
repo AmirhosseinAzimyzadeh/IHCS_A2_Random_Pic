@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+      button {
+        font-size: 2.5rem;
+        padding: 10px 20px;
+        margin: 10px;
+      }
+    </style>
+    <meta name="viewport" initial-scale="1">
+    <meta charset="UTF-8">
+    <title>A2 Random Pic</title>
+    <body>
+      <div>
+        <img id="image">
+      </div>
+      <div>
+        <button id="prev"><</button>
+        <button id="next">Next</button>
+        <span id="currentNumber"></span>
+      </div>
+    </body>
+
+    <script>
+      const MAX_IMAGES = 4;
+      let index = 0;
+      const shuffleNumbers = [];
+
+      // fill shuffleNumbers with randomly shuffled numbers
+      for (let i = 1; i <= MAX_IMAGES; i++) {
+        shuffleNumbers.push(i);
+      }
+      shuffleNumbers.sort(() => Math.random() - 0.5);
+
+      console.log(shuffleNumbers)
+
+      const prev = document.getElementById("prev");
+      prev.addEventListener("click", () => {
+        if (index - 1 < 0) index = MAX_IMAGES - 1;
+        else index--;
+        changeImage(index);
+      });
+      const next = document.getElementById("next");
+      next.addEventListener("click", () => {
+        if (index + 1 >= MAX_IMAGES) index = 0;
+        else index++;
+        changeImage(index);
+      });
+
+
+      const currentNumber = document.getElementById("currentNumber");
+      function changeImage(index) {
+        const image = document.getElementById("image");
+        image.src = "sample0" + shuffleNumbers[index] + ".png";
+        currentNumber.innerHTML = index + 1;
+      }
+
+      changeImage(index);
+
+    </script>
+</head>
+</html>
